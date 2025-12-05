@@ -1,0 +1,62 @@
+{
+    "dark_minimal": {
+        "name": "Dark Minimal",
+        "bg": "#1e1e1e",
+        "surface": "#252525",
+        "border": "#007acc",
+        "text": "#ffffff",
+        "text_secondary": "#cccccc",
+        "accent": "#4ec9b0",
+        "success": "#50fa7b",
+        "error": "#ff5555",
+        "warning": "#ffb86c"
+    },
+    "light_clean": {
+        "name": "Light Clean",
+        "bg": "#ffffff",
+        "surface": "#f3f3f3",
+        "border": "#0078d4",
+        "text": "#000000",
+        "text_secondary": "#666666",
+        "accent": "#50e6ff",
+        "success": "#107c10",
+        "error": "#e81123",
+        "warning": "#ff8c00"
+    },
+    "medical_blue": {
+        "name": "Medical Blue",
+        "bg": "#f0f8ff",
+        "surface": "#e6f2ff",
+        "border": "#1e90ff",
+        "text": "#003366",
+        "text_secondary": "#336699",
+        "accent": "#00bfff",
+        "success": "#32cd32",
+        "error": "#dc143c",
+        "warning": "#ffa500"
+    },
+    "forest_green": {
+        "name": "Forest",
+        "bg": "#264653",
+        "surface": "#2a9d8f",
+        "border": "#e9c46a",
+        "text": "#f4a261",
+        "text_secondary": "#e76f51",
+        "accent": "#2a9d8f",
+        "success": "#06d6a0",
+        "error": "#ef476f",
+        "warning": "#ffd166"
+    },
+    "sunset_orange": {
+        "name": "Sunset",
+        "bg": "#2e1a47",
+        "surface": "#3d2667",
+        "border": "#ff6f61",
+        "text": "#ffd700",
+        "text_secondary": "#fdebd0",
+        "accent": "#ff6f61",
+        "success": "#50fa7b",
+        "error": "#ff5555",
+        "warning": "#ffb86c"
+    }
+}
