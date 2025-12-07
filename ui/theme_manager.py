@@ -1,17 +1,17 @@
 """
 Theme Manager for MedTranslate Pro
-Handles application theming and styling
+Handles application theming and styling with a comprehensive visual system
 """
 
 import json
 import os
-from typing import Dict, Optional
+from typing import Dict, Any, Optional
 
 
 class ThemeManager:
-    """Manages application themes"""
+    """Manages application themes with comprehensive color system"""
     
-    def __init__(self, themes_path: str = "resources/themes/default_themes.json"):
+    def __init__(self, themes_path: str = "resources/themes/themes.json"):
         """
         Initialize theme manager
         
@@ -19,249 +19,324 @@ class ThemeManager:
             themes_path: Path to themes JSON file
         """
         self.themes_path = themes_path
-        self.themes = self.load_themes()
+        self.default_themes = self._get_default_themes()
+        self.themes = self.default_themes.copy()
+        
+        # Load custom/saved themes
+        loaded = self.load_themes()
+        if loaded:
+            # Merge loaded with defaults (don't overwrite structure if loaded is legacy)
+            # Actually, standard is to update. 
+            self.themes.update(loaded)
+            
         self.current_theme_name = "dark_minimal"
-        self.current_theme = self.themes.get(self.current_theme_name, {})
+        self.current_theme = self.themes.get(self.current_theme_name, self.themes["dark_minimal"])
     
     def load_themes(self) -> Dict:
         """Load themes from JSON file"""
         if not os.path.exists(self.themes_path):
-            print(f"Warning: Themes file not found: {self.themes_path}")
-            return self._get_default_themes()
+            return {}
         
         try:
             with open(self.themes_path, 'r', encoding='utf-8') as f:
                 return json.load(f)
-        except Exception as e:
-            print(f"Error loading themes: {e}")
-            return self._get_default_themes()
-    
+        except Exception:
+            return {}
+            
     def _get_default_themes(self) -> Dict:
-        """Get default themes as fallback"""
+        """Get 5 Professional Themes"""
         return {
             "dark_minimal": {
                 "name": "Dark Minimal",
-                "bg": "#1e1e1e",
-                "surface": "#252525",
-                "border": "#007acc",
-                "text": "#ffffff",
-                "text_secondary": "#cccccc",
-                "accent": "#4ec9b0",
-                "success": "#50fa7b",
-                "error": "#ff5555",
-                "warning": "#ffb86c"
+                "background": {
+                    "primary": "#0f0f0f",
+                    "secondary": "#1a1a1a",
+                    "tertiary": "#262626",
+                    "elevated": "#2a2a2a"
+                },
+                "text": {
+                    "primary": "#ffffff", 
+                    "secondary": "#a1a1aa",
+                    "tertiary": "#52525b",
+                    "disabled": "#3f3f46",
+                    "inverse": "#000000"
+                },
+                "semantic": {
+                    "success": "#10b981",
+                    "warning": "#f59e0b",
+                    "error": "#ef4444",
+                    "info": "#3b82f6",
+                    "accent": "#8b5cf6" # Purple
+                },
+                "border": "#27272a",
+                "sources": {
+                    "libre": "#3b82f6",
+                    "openrouter_ai": "#8b5cf6",
+                    "local": "#10b981",
+                    "keyboard_fixer": "#f59e0b",
+                    "auto": "#6366f1"
+                }
+            },
+            
+            "light_professional": {
+                "name": "Light Professional",
+                "background": {
+                    "primary": "#ffffff",
+                    "secondary": "#f8f9fa",
+                    "tertiary": "#e9ecef",
+                    "elevated": "#ffffff"
+                },
+                "text": {
+                    "primary": "#1f2937",
+                    "secondary": "#6b7280",
+                    "tertiary": "#9ca3af",
+                    "disabled": "#d1d5db",
+                    "inverse": "#ffffff"
+                },
+                "semantic": {
+                    "success": "#059669",
+                    "warning": "#d97706",
+                    "error": "#dc2626",
+                    "info": "#2563eb",
+                    "accent": "#3b82f6" # Blue
+                },
+                "border": "#e5e7eb",
+                "sources": {"libre": "#3b82f6", "openrouter_ai": "#8b5cf6", "local": "#10b981", "keyboard_fixer": "#f59e0b", "auto": "#6366f1"}
+            },
+            
+            "deep_ocean": {
+                "name": "Deep Ocean",
+                "background": {
+                    "primary": "#0a1929",
+                    "secondary": "#132f4c",
+                    "tertiary": "#173a5e",
+                    "elevated": "#1e4976"
+                },
+                "text": {
+                    "primary": "#e2e8f0",
+                    "secondary": "#94a3b8",
+                    "tertiary": "#64748b",
+                    "disabled": "#475569",
+                    "inverse": "#0f172a"
+                },
+                "semantic": {
+                    "success": "#4ade80",
+                    "warning": "#fbbf24",
+                    "error": "#f87171",
+                    "info": "#60a5fa",
+                    "accent": "#06b6d4" # Cyan
+                },
+                "border": "#1e4976",
+                "sources": {"libre": "#3b82f6", "openrouter_ai": "#8b5cf6", "local": "#10b981", "keyboard_fixer": "#f59e0b", "auto": "#6366f1"}
+            },
+            
+            "warm_sunset": {
+                "name": "Warm Sunset",
+                "background": {
+                    "primary": "#1a0f1f",
+                    "secondary": "#2d1b3d",
+                    "tertiary": "#432454",
+                    "elevated": "#3b2149"
+                },
+                "text": {
+                    "primary": "#fdf4ff",
+                    "secondary": "#e8d5f0",
+                    "tertiary": "#cba6d6",
+                    "disabled": "#83658f",
+                    "inverse": "#1a0f1f"
+                },
+                "semantic": {
+                    "success": "#34d399",
+                    "warning": "#fbbf24",
+                    "error": "#fb7185",
+                    "info": "#818cf8",
+                    "accent": "#ff6b35" # Orange
+                },
+                "border": "#56326e",
+                "sources": {"libre": "#3b82f6", "openrouter_ai": "#8b5cf6", "local": "#10b981", "keyboard_fixer": "#f59e0b", "auto": "#6366f1"}
+            },
+            
+            "medical_blue": {
+                "name": "Medical Blue",
+                "background": {
+                    "primary": "#f0f8ff",
+                    "secondary": "#e6f2ff",
+                    "tertiary": "#cfe4fc",
+                    "elevated": "#ffffff"
+                },
+                "text": {
+                    "primary": "#0c4a6e",
+                    "secondary": "#0369a1",
+                    "tertiary": "#38bdf8",
+                    "disabled": "#bae6fd",
+                    "inverse": "#ffffff"
+                },
+                "semantic": {
+                    "success": "#0ea5e9",
+                    "warning": "#f59e0b",
+                    "error": "#ef4444",
+                    "info": "#0284c7",
+                    "accent": "#1e90ff" # Medical Blue
+                },
+                "border": "#bfdbfe",
+                "sources": {"libre": "#3b82f6", "openrouter_ai": "#8b5cf6", "local": "#10b981", "keyboard_fixer": "#f59e0b", "auto": "#6366f1"}
             }
         }
     
     def set_theme(self, theme_name: str) -> bool:
-        """
-        Set current theme
-        
-        Args:
-            theme_name: Name of theme to activate
-        
-        Returns:
-            True if successful, False otherwise
-        """
+        """Set current theme"""
         if theme_name in self.themes:
             self.current_theme_name = theme_name
             self.current_theme = self.themes[theme_name]
             return True
-        else:
-            print(f"Theme '{theme_name}' not found")
-            return False
+        return False
     
     def get_color(self, color_name: str, default: str = "#000000") -> str:
         """
-        Get color from current theme
-        
-        Args:
-            color_name: Name of color (bg, text, border, etc.)
-            default: Default color if not found
-        
-        Returns:
-            Color hex code
+        Get color supporting nested dot notation and legacy mapping.
+        Example: 'text.primary' or 'semantic.success'
         """
-        return self.current_theme.get(color_name, default)
-    
+        # 1. Try Legacy Mapping
+        legacy_map = {
+            'bg': 'background.primary',
+            'surface': 'background.secondary',
+            'text': 'text.primary',
+            'text_secondary': 'text.secondary',
+            'accent': 'semantic.accent',
+            'success': 'semantic.success',
+            'error': 'semantic.error',
+            'warning': 'semantic.warning',
+            'border': 'border'
+        }
+        
+        path = legacy_map.get(color_name, color_name)
+        
+        # 2. Traverse nested dict
+        try:
+            val = self.current_theme
+            for key in path.split('.'):
+                val = val.get(key, {})
+            
+            if isinstance(val, str):
+                return val
+        except:
+            pass
+            
+        return default
+        
+    def get_available_themes(self) -> list:
+        return list(self.themes.keys())
+
     def get_stylesheet(self) -> str:
-        """
-        Get Qt stylesheet for current theme
-        
-        Returns:
-            Qt stylesheet string
-        """
-        theme = self.current_theme
+        """Get Qt stylesheet for current theme"""
+        bg = self.get_color('background.primary')
+        bg_sec = self.get_color('background.secondary')
+        text = self.get_color('text.primary')
+        text_sec = self.get_color('text.secondary')
+        accent = self.get_color('semantic.accent')
+        border = self.get_color('border')
         
         return f"""
         QWidget {{
-            background-color: {theme.get('bg', '#1e1e1e')};
-            color: {theme.get('text', '#ffffff')};
+            background-color: {bg};
+            color: {text};
             font-family: 'Segoe UI', Arial, sans-serif;
-            font-size: 12px;
+            font-size: 13px;
         }}
         
         QLabel {{
-            color: {theme.get('text', '#ffffff')};
+            color: {text};
             background-color: transparent;
         }}
         
         QPushButton {{
-            background-color: {theme.get('accent', '#4ec9b0')};
-            color: {theme.get('bg', '#1e1e1e')};
+            background-color: {accent};
+            color: {self.get_color('text.inverse')};
             border: none;
             padding: 8px 16px;
-            border-radius: 4px;
-            font-weight: bold;
+            border-radius: 6px;
+            font-weight: 600;
         }}
         
         QPushButton:hover {{
-            background-color: {theme.get('border', '#007acc')};
+            opacity: 0.9;
         }}
         
-        QPushButton:pressed {{
-            background-color: {theme.get('surface', '#252525')};
+        QLineEdit, QTextEdit, QPlainTextEdit, QListWidget {{
+            background-color: {bg_sec};
+            color: {text};
+            border: 1px solid {border};
+            border-radius: 6px;
+            padding: 8px;
         }}
         
-        QLineEdit, QTextEdit, QPlainTextEdit {{
-            background-color: {theme.get('surface', '#252525')};
-            color: {theme.get('text', '#ffffff')};
-            border: 1px solid {theme.get('border', '#007acc')};
-            border-radius: 4px;
-            padding: 6px;
-        }}
-        
-        QLineEdit:focus, QTextEdit:focus, QPlainTextEdit:focus {{
-            border: 2px solid {theme.get('accent', '#4ec9b0')};
+        QLineEdit:focus, QTextEdit:focus {{
+            border: 2px solid {accent};
         }}
         
         QComboBox {{
-            background-color: {theme.get('surface', '#252525')};
-            color: {theme.get('text', '#ffffff')};
-            border: 1px solid {theme.get('border', '#007acc')};
-            border-radius: 4px;
-            padding: 6px;
-        }}
-        
-        QComboBox::drop-down {{
-            border: none;
-        }}
-        
-        QComboBox::down-arrow {{
-            image: none;
-            border-left: 5px solid transparent;
-            border-right: 5px solid transparent;
-            border-top: 5px solid {theme.get('text', '#ffffff')};
-        }}
-        
-        QTabWidget::pane {{
-            border: 1px solid {theme.get('border', '#007acc')};
-            background-color: {theme.get('bg', '#1e1e1e')};
-        }}
-        
-        QTabBar::tab {{
-            background-color: {theme.get('surface', '#252525')};
-            color: {theme.get('text_secondary', '#cccccc')};
-            padding: 8px 16px;
-            border: 1px solid {theme.get('border', '#007acc')};
-            border-bottom: none;
-        }}
-        
-        QTabBar::tab:selected {{
-            background-color: {theme.get('accent', '#4ec9b0')};
-            color: {theme.get('bg', '#1e1e1e')};
+            background-color: {bg_sec};
+            color: {text};
+            border: 1px solid {border};
+            border-radius: 6px;
+            padding: 6px 12px;
         }}
         
         QCheckBox {{
-            color: {theme.get('text', '#ffffff')};
+            color: {text};
             spacing: 8px;
         }}
         
         QCheckBox::indicator {{
             width: 18px;
             height: 18px;
-            border: 2px solid {theme.get('border', '#007acc')};
-            border-radius: 3px;
-            background-color: {theme.get('surface', '#252525')};
+            border: 2px solid {border};
+            border-radius: 4px;
+            background-color: {bg_sec};
         }}
         
         QCheckBox::indicator:checked {{
-            background-color: {theme.get('accent', '#4ec9b0')};
-        }}
-        
-        QRadioButton {{
-            color: {theme.get('text', '#ffffff')};
-            spacing: 8px;
-        }}
-        
-        QRadioButton::indicator {{
-            width: 18px;
-            height: 18px;
-            border: 2px solid {theme.get('border', '#007acc')};
-            border-radius: 9px;
-            background-color: {theme.get('surface', '#252525')};
-        }}
-        
-        QRadioButton::indicator:checked {{
-            background-color: {theme.get('accent', '#4ec9b0')};
+            background-color: {accent};
+            border-color: {accent};
         }}
         
         QScrollBar:vertical {{
-            background-color: {theme.get('surface', '#252525')};
+            background-color: {bg};
             width: 12px;
-            border-radius: 6px;
         }}
         
         QScrollBar::handle:vertical {{
-            background-color: {theme.get('border', '#007acc')};
+            background-color: {border};
             border-radius: 6px;
             min-height: 20px;
+            margin: 2px;
         }}
         
-        QScrollBar::handle:vertical:hover {{
-            background-color: {theme.get('accent', '#4ec9b0')};
+        QTabWidget::pane {{
+            border: 1px solid {border};
+            background-color: {bg};
         }}
         
-        QScrollBar::add-line:vertical, QScrollBar::sub-line:vertical {{
-            height: 0px;
+        QTabBar::tab {{
+            background-color: {bg_sec};
+            color: {text_sec};
+            padding: 10px 20px;
+            border: 1px solid {border};
+            margin-right: 2px;
+            border-top-left-radius: 6px;
+            border-top-right-radius: 6px;
+        }}
+        
+        QTabBar::tab:selected {{
+            background-color: {bg};
+            color: {accent};
+            border-bottom: 2px solid {accent};
         }}
         """
-    
-    def get_available_themes(self) -> list:
-        """Get list of available theme names"""
-        return list(self.themes.keys())
-    
-    def add_custom_theme(self, name: str, colors: Dict) -> bool:
-        """
-        Add a custom theme
-        
-        Args:
-            name: Theme name
-            colors: Dictionary of color definitions
-        
-        Returns:
-            True if successful
-        """
-        try:
-            self.themes[name] = colors
-            # Save to file
-            with open(self.themes_path, 'w', encoding='utf-8') as f:
-                json.dump(self.themes, f, indent=4)
-            return True
-        except Exception as e:
-            print(f"Error adding custom theme: {e}")
-            return False
 
-
-# Example usage
 if __name__ == "__main__":
-    theme_manager = ThemeManager()
-    
-    print("Available themes:")
-    for theme in theme_manager.get_available_themes():
-        print(f"  - {theme}")
-    
-    # Set theme
-    theme_manager.set_theme("dark_minimal")
-    print(f"\nCurrent theme: {theme_manager.current_theme_name}")
-    print(f"Background color: {theme_manager.get_color('bg')}")
+    tm = ThemeManager()
+    print("Themes:", tm.get_available_themes())
+    tm.set_theme("deep_ocean")
+    print("Current Accent:", tm.get_color("semantic.accent"))
+    print("Legacy Accent:", tm.get_color("accent"))

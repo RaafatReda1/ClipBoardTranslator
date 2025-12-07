@@ -40,7 +40,7 @@ class ConfigManager:
             "font_size": 12
         },
         "openrouter": {
-            "api_key": "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",
+            "api_key": "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",
             "model": "meta-llama/llama-3-8b-instruct:free",
             "system_prompt": "You are a concise medical terminology assistant. When given a medical term:\n1. Provide Arabic translation\n2. Brief 1-2 sentence explanation in Arabic\n3. ONE simple example\n4. Keep under 60 words\n\nFormat your response clearly and concisely.",
             "custom_prompt": "",

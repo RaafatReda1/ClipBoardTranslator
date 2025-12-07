@@ -11,38 +11,34 @@ class KeyboardFixer:
     
     def __init__(self):
         """Initialize keyboard mappings"""
-        # Arabic → English keyboard mapping
+        # Arabic → English keyboard mapping (Standard 101)
         self.ar_to_en = {
             'ض': 'q', 'ص': 'w', 'ث': 'e', 'ق': 'r', 'ف': 't',
             'غ': 'y', 'ع': 'u', 'ه': 'i', 'خ': 'o', 'ح': 'p',
             'ج': '[', 'د': ']', 'ش': 'a', 'س': 's', 'ي': 'd',
             'ب': 'f', 'ل': 'g', 'ا': 'h', 'ت': 'j', 'ن': 'k',
-            'م': 'l', 'ك': ';', 'ط': "'", 'ذ': '`', 'ئ': 'z',
-            'ء': 'x', 'ؤ': 'c', 'ر': 'v', 'ى': 'b', 'ة': 'n',
-            'و': 'm', 'ز': ',', 'ظ': '.', '÷': '/',
-            'َ': 'Q', 'ً': 'W', 'ُ': 'E', 'ٌ': 'R', 'لإ': 'T',
-            'إ': 'Y', ''': 'U', 'آ': 'O', '×': 'P', '؛': '<',
-            'ـ': '_', 'ِ': 'A', 'ٍ': 'S', ']': 'D', '[': 'F',
-            'لأ': 'G', 'أ': 'H', 'ـ': 'J', '،': 'K', '/': 'L',
-            ':': ':', '"': '"', '~': '~', 'ْ': 'Z', '}': 'X',
-            '{': 'C', 'لآ': 'V', 'لا': 'B', 'لى': 'N', 'لا': 'M',
-            '،': '<', '.': '>', '؟': '?'
+            'م': 'l', 'ك': ';', 'ط': "'", 'ذ': '`', 
+            'ئ': 'z', 'ء': 'x', 'ؤ': 'c', 'ر': 'v', 
+            'لا': 'b', 'لآ': 'b', 'لأ': 'G', # B maps to لا usually (Lam+Alif)
+            'ى': 'n', 'ة': 'm', 'و': ',', 'ز': '.', 'ظ': '/',
+            '؟': '?', '،': '<', '؛': 'P', '×': 'O', '÷': 'I'
         }
         
         # English → Arabic (reverse mapping)
         self.en_to_ar = {v: k for k, v in self.ar_to_en.items()}
         
-        # Additional common mappings
+        # Explicit corrections for common QWERTY/AR101 variations
         self.en_to_ar.update({
             'q': 'ض', 'w': 'ص', 'e': 'ث', 'r': 'ق', 't': 'ف',
             'y': 'غ', 'u': 'ع', 'i': 'ه', 'o': 'خ', 'p': 'ح',
             '[': 'ج', ']': 'د', 'a': 'ش', 's': 'س', 'd': 'ي',
             'f': 'ب', 'g': 'ل', 'h': 'ا', 'j': 'ت', 'k': 'ن',
             'l': 'م', ';': 'ك', "'": 'ط', '`': 'ذ', 'z': 'ئ',
-            'x': 'ء', 'c': 'ؤ', 'v': 'ر', 'b': 'ى', 'n': 'ة',
-            'm': 'و', ',': 'ز', '.': 'ظ', '/': '÷'
+            'x': 'ء', 'c': 'ؤ', 'v': 'ر', 
+            'b': 'لا', 'n': 'ى', 'm': 'ة', ',': 'و', '.': 'ز', '/': 'ظ',
+            '?': '؟'
         })
-    
+
     def detect_and_fix(self, text: str) -> Tuple[bool, str, str]:
         """
         Detect if keyboard layout is wrong and fix it
@@ -53,49 +49,58 @@ class KeyboardFixer:
         """
         if not text or len(text) == 0:
             return False, text, 'none'
-        
-        # Check for English keyboard typing Arabic
-        en_to_ar_score = self._calculate_en_to_ar_score(text)
-        
-        # Check for Arabic keyboard typing English
-        ar_to_en_score = self._calculate_ar_to_en_score(text)
-        
-        # Determine which fix to apply
-        if en_to_ar_score > 0.3:  # 30% suspicious chars
-            fixed = self._convert(text, self.en_to_ar)
-            return True, fixed, 'en_to_ar'
-        
-        elif ar_to_en_score > 0.5:  # 50% Arabic chars
-            fixed = self._convert(text, self.ar_to_en)
-            # Check if result looks more like English
-            if self._looks_like_english(fixed):
-                return True, fixed, 'ar_to_en'
+            
+        # 1. Try treating as Gibberish EN -> AR
+        # (Input looks like English chars but meant to be Arabic)
+        if self._looks_like_english_gibberish(text):
+            fixed_ar = self._convert(text, self.en_to_ar)
+            # If the output looks like valid Arabic, accept it
+            if self._looks_like_arabic(fixed_ar):
+                 return True, fixed_ar, 'en_to_ar'
+                 
+        # 2. Try treating as Gibberish AR -> EN
+        # (Input looks like Arabic chars but meant to be English)
+        if self._looks_like_arabic(text):
+            fixed_en = self._convert(text, self.ar_to_en)
+            # If the output looks like valid English
+            if self._looks_like_english(fixed_en):
+                 return True, fixed_en, 'ar_to_en'
+                 
+        # 3. Aggressive Fallback for short texts (like "Desktop" -> "يثسنفخح")
+        # If input is clearly one lang but converts to valid other lang
+        # check scores
         
         return False, text, 'none'
-    
-    def _calculate_en_to_ar_score(self, text: str) -> float:
-        """Calculate probability that English keyboard was used for Arabic"""
-        suspicious_chars = [';', "'", '[', ']', '`', ',', '.', '/']
-        score = sum(1 for c in text if c in suspicious_chars)
-        return score / len(text) if len(text) > 0 else 0
-    
-    def _calculate_ar_to_en_score(self, text: str) -> float:
-        """Calculate probability that Arabic keyboard was used for English"""
+
+    def _looks_like_english_gibberish(self, text: str) -> bool:
+        """Check if text is mostly English punctuation/letters but meaningless?"""
+        # Heuristic: mostly ascii
+        ascii_count = sum(1 for c in text if c.isascii())
+        return ascii_count / len(text) > 0.8
+        
+    def _looks_like_arabic(self, text: str) -> bool:
+        """Check if text contains Arabic letters"""
         arabic_chars = "ضصثقفغعهخحجدشسيبلاتنمكطئءؤرلاىةوزظ"
-        arabic_count = sum(1 for c in text if c in arabic_chars)
-        return arabic_count / len(text) if len(text) > 0 else 0
-    
+        count = sum(1 for c in text if c in arabic_chars or c in 'ًٌٍَُِّْ')
+        return count / len(text) > 0.3 # Low threshold to catch even partial matches
+
     def _looks_like_english(self, text: str) -> bool:
         """Check if text looks like English words"""
         # Simple heuristic: check if mostly ASCII letters
         ascii_count = sum(1 for c in text if c.isascii() and c.isalpha())
-        return ascii_count / len(text) > 0.7 if len(text) > 0 else False
+        return ascii_count / len(text) > 0.6 if len(text) > 0 else False
     
     def _convert(self, text: str, mapping: dict) -> str:
         """Apply character mapping"""
         result = []
-        for char in text:
-            result.append(mapping.get(char, char))
+        i = 0
+        while i < len(text):
+            char = text[i]
+            if char in mapping:
+                result.append(mapping[char])
+            else:
+                result.append(char)
+            i += 1
         return ''.join(result)
     
     def is_keyboard_error(self, text: str) -> bool:
@@ -104,7 +109,6 @@ class KeyboardFixer:
         return is_fixed
 
 
-# Example usage and testing
 if __name__ == "__main__":
     fixer = KeyboardFixer()
     
@@ -112,7 +116,8 @@ if __name__ == "__main__":
     test_cases = [
         ";jhf",  # Should convert to كتاب
         "hgshk",  # Should convert to السلام
-        "ضصثق",  # Should convert to qwer
+        "لاخخن", # Should convert to book (maps b to لا)
+        "يثسنفخح", # Should convert to desktop
     ]
     
     for test in test_cases:

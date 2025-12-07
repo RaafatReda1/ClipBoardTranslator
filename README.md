@@ -52,7 +52,18 @@ venv\Scripts\activate
 pip install -r requirements.txt
 ```
 
-4. **Run the application**
+4. **Configure API Key (Optional - for AI features)**
+```bash
+# Copy the template config file
+copy config.template.json config.json
+
+# Edit config.json and add your OpenRouter API key
+# Get a free API key from: https://openrouter.ai/
+```
+
+**Note:** The app works perfectly without an API key using the other 3 translation sources!
+
+5. **Run the application**
 ```bash
 python main.py
 ```

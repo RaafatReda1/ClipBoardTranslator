@@ -28,20 +28,20 @@ class TranslationEngine:
         self.logger = logger or Logger()
         
         # Initialize cache
-        cache_size = config.get('translation', 'cache_size', default=100)
+        cache_size = config.get('translation', {}).get('cache_size', 100)
         self.cache = CacheManager(max_size=cache_size)
         
         # Initialize translation sources
         self.keyboard_fixer = KeyboardFixer()
         self.local_dict = LocalDictionary(
-            config.get('dictionaries', 'medical_terms_path', default='dictionary.json')
+            config.get('dictionaries', {}).get('medical_terms_path', 'dictionary.json')
         )
         self.libre_translator = LibreTranslator(
-            timeout=config.get('advanced', 'network_timeout', default=5)
+            timeout=config.get('advanced', {}).get('network_timeout', 5)
         )
         
         # Initialize OpenRouter AI
-        ai_config = config.get('openrouter', default={})
+        ai_config = config.get('openrouter', {})
         self.openrouter_ai = OpenRouterAI(
             api_key=ai_config.get('api_key', ''),
             model=ai_config.get('model', 'meta-llama/llama-3-8b-instruct:free'),
@@ -52,9 +52,9 @@ class TranslationEngine:
         )
         
         # Get active source and priority
-        self.active_source = config.get('translation', 'active_source', default='auto')
-        self.source_priority = config.get('translation', 'source_priority', 
-                                         default=['keyboard_fixer', 'openrouter_ai', 'libre', 'local'])
+        self.active_source = config.get('translation', {}).get('active_source', 'auto')
+        self.source_priority = config.get('translation', {}).get('source_priority',
+                                         ['keyboard_fixer', 'openrouter_ai', 'libre', 'local'])
         
         self.logger.info("Translation engine initialized")
     
@@ -77,7 +77,7 @@ class TranslationEngine:
             return "Invalid input (too long or contains URLs)", "none"
         
         # Check cache first (if not forcing a source)
-        if not force_source and self.config.get('translation', 'cache_enabled', default=True):
+        if not force_source and self.config.get('translation', {}).get('cache_enabled', True):
             cached = self.cache.get(text, self.active_source, "auto", "ar")
             if cached:
                 self.logger.debug(f"Cache hit for: {text}")
@@ -110,8 +110,8 @@ class TranslationEngine:
                 # Check if it's a keyboard error
                 is_fixed, fixed_text, fix_type = self.keyboard_fixer.detect_and_fix(text)
                 if is_fixed:
-                    self.logger.info(f"Keyboard fix: {text} → {fixed_text} ({fix_type})")
-                    return f"Fixed: {fixed_text}", "keyboard_fixer"
+                    self.logger.info(f"Keyboard fix: {text} -> {fixed_text} ({fix_type})")
+                    return fixed_text, "keyboard_fixer"
             
             elif source == "local":
                 # Try local dictionary
@@ -137,7 +137,7 @@ class TranslationEngine:
                         return translation, "openrouter_ai"
         
         # Fallback to local dictionary if offline
-        if self.config.get('translation', 'offline_fallback', default=True):
+        if self.config.get('translation', {}).get('offline_fallback', True):
             translation = self.local_dict.translate(text)
             if translation:
                 return translation, "local_fallback"
@@ -150,7 +150,7 @@ class TranslationEngine:
             if source == "keyboard_fixer":
                 is_fixed, fixed_text, fix_type = self.keyboard_fixer.detect_and_fix(text)
                 if is_fixed:
-                    return f"Fixed ({fix_type}): {fixed_text}", "keyboard_fixer"
+                    return fixed_text, "keyboard_fixer"
                 else:
                     return "No keyboard error detected", "keyboard_fixer"
             
@@ -211,12 +211,12 @@ class TranslationEngine:
     def update_config(self, config: dict):
         """Update configuration"""
         self.config = config
-        self.active_source = config.get('translation', 'active_source', default='auto')
-        self.source_priority = config.get('translation', 'source_priority',
-                                         default=['keyboard_fixer', 'openrouter_ai', 'libre', 'local'])
+        self.active_source = config.get('translation', {}).get('active_source', 'auto')
+        self.source_priority = config.get('translation', {}).get('source_priority',
+                                         ['keyboard_fixer', 'openrouter_ai', 'libre', 'local'])
         
         # Update AI prompts
-        ai_config = config.get('openrouter', default={})
+        ai_config = config.get('openrouter', {})
         self.openrouter_ai.update_prompts(
             system_prompt=ai_config.get('system_prompt'),
             custom_prompt=ai_config.get('custom_prompt')

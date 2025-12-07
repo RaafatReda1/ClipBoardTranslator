@@ -52,6 +52,9 @@ Format your response clearly and concisely."""
         Returns:
             AI-generated explanation or None if error
         """
+        import logging
+        logger = logging.getLogger("MedTranslatePro.AI")
+        
         try:
             # Combine system prompt with custom prompt
             full_system_prompt = self.system_prompt
@@ -66,68 +69,102 @@ Format your response clearly and concisely."""
                 "X-Title": "MedTranslate Pro"
             }
             
+            # Merge system prompt into user message for better compatibility with some models
+            combined_prompt = f"{full_system_prompt}\n\nTerm to explain: {text}"
+            
             payload = {
                 "model": self.model,
                 "messages": [
-                    {"role": "system", "content": full_system_prompt},
-                    {"role": "user", "content": f"Explain this medical term: {text}"}
-                ],
-                "max_tokens": self.max_tokens,
-                "temperature": self.temperature
+                    {"role": "user", "content": combined_prompt}
+                ]
             }
             
-            # Make request
-            response = requests.post(
-                self.base_url,
-                headers=headers,
-                json=payload,
-                timeout=10
-            )
+            import time
             
-            if response.status_code == 200:
-                data = response.json()
-                return data['choices'][0]['message']['content']
-            else:
-                error_msg = f"API Error {response.status_code}"
+            max_retries = 2
+            retry_delay = 1
+            
+            for attempt in range(max_retries + 1):
                 try:
-                    error_data = response.json()
-                    error_msg += f": {error_data.get('error', {}).get('message', 'Unknown error')}"
-                except:
-                    pass
-                print(error_msg)
-                return None
+                    logger.debug(f"Sending AI request for: {text} (Attempt {attempt+1}/{max_retries+1})")
+                    
+                    # Make request
+                    response = requests.post(
+                        self.base_url,
+                        headers=headers,
+                        json=payload,
+                        timeout=20
+                    )
+                    
+                    if response.status_code == 200:
+                        data = response.json()
+                        
+                        # Robust extraction
+                        choices = data.get('choices', [])
+                        if not choices:
+                            logger.warning(f"AI Response attempt {attempt+1} contained no choices. RAW: {data}")
+                            if attempt < max_retries:
+                                time.sleep(retry_delay)
+                                continue
+                            return None
+                            
+                        message = choices[0].get('message', {})
+                        content = message.get('content', '')
+                        
+                        if not content:
+                            logger.warning(f"AI Response attempt {attempt+1} contained empty content.")
+                            if attempt < max_retries:
+                                time.sleep(retry_delay)
+                                continue
+                            return None
+                            
+                        return content
+                        
+                    elif response.status_code == 429: # Rate limit
+                        logger.warning("AI Rate Limited (429). Retrying...")
+                        if attempt < max_retries:
+                            time.sleep(retry_delay * 2) # Wait longer for rate limits
+                            continue
+                    else:
+                        logger.error(f"API Error {response.status_code}: {response.text[:200]}")
+                        
+                except requests.exceptions.Timeout:
+                    logger.warning("OpenRouter AI request timed out.")
+                except Exception as e:
+                    logger.error(f"OpenRouter AI attempt {attempt+1} failed: {e}")
+                
+                # Check if we should retry
+                if attempt < max_retries:
+                    time.sleep(retry_delay)
+                    retry_delay *= 2 # Exponential backoff
+            
+            return None
         
         except requests.exceptions.Timeout:
-            print("OpenRouter AI request timed out")
+            logger.error("OpenRouter AI request timed out")
             return None
         except Exception as e:
-            print(f"OpenRouter AI error: {e}")
+            logger.error(f"OpenRouter AI exceptional error: {e}", exc_info=True)
             return None
     
     def is_available(self) -> bool:
         """Check if AI service is available"""
         try:
-            # Test with a simple request
             headers = {
                 "Authorization": f"Bearer {self.api_key}",
                 "Content-Type": "application/json"
             }
-            
             payload = {
                 "model": self.model,
-                "messages": [
-                    {"role": "user", "content": "test"}
-                ],
-                "max_tokens": 10
+                "messages": [{"role": "user", "content": "test"}],
+                "max_tokens": 5
             }
-            
             response = requests.post(
                 self.base_url,
                 headers=headers,
                 json=payload,
                 timeout=5
             )
-            
             return response.status_code == 200
         except:
             return False

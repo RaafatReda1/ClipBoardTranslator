@@ -33,7 +33,7 @@ class LocalDictionary:
                     self._preprocess_text(key): value 
                     for key, value in data.items()
                 }
-            print(f"✅ Loaded {len(self.dictionary)} dictionary entries")
+            print(f"Loaded {len(self.dictionary)} dictionary entries")
         except Exception as e:
             print(f"Error loading dictionary: {e}")
             self.dictionary = {}

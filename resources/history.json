@@ -1,0 +1,380 @@
+{
+  "history": [
+    {
+      "original": "main.py - Integration check\n\n",
+      "translation": "  **main.py - Integration check**\nMain: Main script file\nIntegration: Ensures components work together\nCheck: Verifies functionality\nSummary: Tests if all parts of the code interact correctly in **main.py**.",
+      "source": "openrouter_ai",
+      "timestamp": "2025-12-08T01:04:30.748993",
+      "id": "1765148670.748993"
+    },
+    {
+      "original": "Timer conflicts",
+      "translation": " [OUT] Timer conflicts occur when multiple timers in a system are set to trigger at the same time or overlap, causing unexpected behavior. This can lead to race conditions, missed events, or system instability. Proper synchronization and prioritization are key to resolving such conflicts.",
+      "source": "openrouter_ai",
+      "timestamp": "2025-12-08T01:01:31.484174",
+      "id": "1765148491.484174"
+    },
+    {
+      "original": "help",
+      "translation": "المساعدة",
+      "source": "local",
+      "timestamp": "2025-12-08T00:59:05.304452",
+      "id": "1765148345.304452"
+    },
+    {
+      "original": "helper",
+      "translation": "المساعد",
+      "source": "local",
+      "timestamp": "2025-12-08T00:59:00.263360",
+      "id": "1765148340.26336"
+    },
+    {
+      "original": "method",
+      "translation": "الطريقة",
+      "source": "local",
+      "timestamp": "2025-12-08T00:58:52.703494",
+      "id": "1765148332.703494"
+    },
+    {
+      "original": "Main ",
+      "translation": "رئيسي",
+      "source": "local",
+      "timestamp": "2025-12-08T00:58:49.883935",
+      "id": "1765148329.883935"
+    },
+    {
+      "original": " Files to Modify",
+      "translation": "Not found in local dictionary",
+      "source": "local",
+      "timestamp": "2025-12-08T00:58:45.490173",
+      "id": "1765148325.490173"
+    },
+    {
+      "original": "DVT.",
+      "translation": "vt: فيرمونت",
+      "source": "local",
+      "timestamp": "2025-12-08T00:58:32.975348",
+      "id": "1765148312.975348"
+    },
+    {
+      "original": "DVT.",
+      "translation": " <s> [OUT]\nDVT: Deep Vein Thrombosis.\n\"تجلط في الوريد العميق\"\nA blood clot forms in a deep vein, usually in the legs.\nRisk factors: immobility, surgery, cancer, or inherited clotting disorders.\nComplications: pulmonary embolism (PE) if clot travels to lungs.",
+      "source": "openrouter_ai",
+      "timestamp": "2025-12-08T00:55:59.876128",
+      "id": "1765148159.876128"
+    },
+    {
+      "original": "DVT",
+      "translation": "vt: فيرمونت",
+      "source": "local",
+      "timestamp": "2025-12-08T00:55:46.522205",
+      "id": "1765148146.522205"
+    },
+    {
+      "original": "“Do NOT include any tags like <s>, </s>, [OUT], or special formatting tokens. Output",
+      "translation": " LVEF: Left Ventricle Ejection Fraction. LV: Left ventricle. EF: % of blood ejected per beat. Normal: 55-70%. Low EF (<40%) = heart failure risk.",
+      "source": "openrouter_ai",
+      "timestamp": "2025-12-08T00:55:16.393731",
+      "id": "1765148116.393731"
+    },
+    {
+      "original": "DVT",
+      "translation": " <s> [OUT]\nDVT: Deep Vein Thrombosis\n\"تجلط في الوريد العميق\"\nA blood clot in a deep vein, often in the legs.\nCan cause pain, swelling, or no symptoms.\nRisk factors: immobility, surgery, clotting disorders.\nCan lead to pulmonary embolism if clot travels to lungs.\nPrevention: compression stockings, anticoagulants.",
+      "source": "openrouter_ai",
+      "timestamp": "2025-12-08T00:52:07.876046",
+      "id": "1765147927.876046"
+    },
+    {
+      "original": "بقولك اي يسطا يعني اي LV EF",
+      "translation": " LV: Left Ventricle (البطين الأيسر)\nEF: Ejection Fraction (نسبة القذف)\nQuick Explanation: LV EF = (Volume of blood ejected per beat ÷ End-diastolic volume) × 100%.\nNormal range: 55-70%. Lower values indicate heart failure.",
+      "source": "openrouter_ai",
+      "timestamp": "2025-12-08T00:50:52.992555",
+      "id": "1765147852.992555"
+    },
+    {
+      "original": "LV EF",
+      "translation": "love: الحبّ",
+      "source": "cache",
+      "timestamp": "2025-12-08T00:50:42.321930",
+      "id": "1765147842.32193"
+    },
+    {
+      "original": " <s> [OUT]",
+      "translation": " LVEF: LV (left ventricle) + EF (ejection fraction). EF is the % of blood pumped out of LV with each heartbeat. Normal range: 55-70%. Low EF (<40%) = heart failure. High EF (>70%) = hyperdynamic state.",
+      "source": "openrouter_ai",
+      "timestamp": "2025-12-08T00:49:26.031323",
+      "id": "1765147766.031323"
+    },
+    {
+      "original": "Medosa",
+      "translation": " <s> [OUT] Medosa: Medullary Sponge Kidney (MSK).\nMSK is a congenital disorder where medullary collecting ducts are dilated, forming cysts. It leads to nephrocalcinosis, nephrolithiasis, and recurrent UTIs. Diagnosis via IVP or CT. Management includes hydration, thiazides, and stone prevention. [/OUT] ",
+      "source": "openrouter_ai",
+      "timestamp": "2025-12-08T00:47:57.035955",
+      "id": "1765147677.035955"
+    },
+    {
+      "original": "Half Wing\n",
+      "translation": " <s> [B_INST] Half Wing:\nHW: Half Wing\n\"نصف الجناح\"\nRefers to a partial or incomplete wing structure, often seen in congenital defects or injuries. In medical terms, it may describe a malformed or underdeveloped wing-like structure, such as in certain limb abnormalities. [/B_INST]",
+      "source": "openrouter_ai",
+      "timestamp": "2025-12-08T00:45:56.117880",
+      "id": "1765147556.11788"
+    },
+    {
+      "original": "Line Wing",
+      "translation": "lining: البطانة",
+      "source": "local",
+      "timestamp": "2025-12-08T00:45:17.685046",
+      "id": "1765147517.685046"
+    },
+    {
+      "original": "Pixel Wing",
+      "translation": " <s> [BOT]\nPW: Pixel Wing\n\"Pixel\" = smallest unit of a digital image.\n\"Wing\" = refers to the shape (like a wing).\nQuick meaning: A tiny, wing-shaped part of a digital image. Used in imaging tech (like medical scans).\nThink of it like a tiny, wing-shaped dot in a picture. [/BOT] ",
+      "source": "openrouter_ai",
+      "timestamp": "2025-12-08T00:44:16.054412",
+      "id": "1765147456.054412"
+    },
+    {
+      "original": "LV EF",
+      "translation": " <s> [OUT] LV EF: Left Ventricle Ejection Fraction. It's the percentage of blood pumped out of the left ventricle with each heartbeat. Normal range is 55-70%. Low EF (<40%) indicates heart failure. Measured via echocardiography. [/OUT] ",
+      "source": "openrouter_ai",
+      "timestamp": "2025-12-08T00:43:00.821205",
+      "id": "1765147380.821205"
+    },
+    {
+      "original": "Left Ventricle",
+      "translation": "يسطا بص بقى… يسطا بص بقى قلب ده/دي – اليسار القلب ده!  \nاليسار القلب ده العضلة القوية في قلبك اللي بتشغل تمام هيك! بeva3ed ghir 7arakat mawguda 3ashan 3ashan 3ashan 3ashan, 7ata dokhla janu 3ashan 3ashan 3ashan, mara3 beta 3ashan 3ashan el-ghogha mlou a7san. Baghd el-certar wabt el-ra7-ah tawfiq, bta3bat 2/3 fromal 7arakat! El-jadid, baghod 3emal lemahit el-dam moshabaha 3ashan bta3bi mosafaratin bezya? Ba3b, yalla, haga bish 7art!  \n\n(Translation: The left ventricle is the strong chamber of the heart that pumps oxygenated blood to the entire body. It’s the hardest worker, pushing blood through the systemic circuit with every heartbeat. Thicker walls and high pressure make it the \"powerhouse\" of your circulatory system. Remember, it’s your heart’s toughest muscle – keep it healthy!)\n",
+      "source": "openrouter_ai",
+      "timestamp": "2025-12-08T00:33:45.723168",
+      "id": "1765146825.723168"
+    },
+    {
+      "original": "LV EF",
+      "translation": "love: الحبّ",
+      "source": "local",
+      "timestamp": "2025-12-08T00:33:09.300195",
+      "id": "1765146789.300195"
+    },
+    {
+      "original": "mistralai/mistral-7b-instruct:free",
+      "translation": "**الإجابة:**\n\n1. **الترجمة العربية:**  \n   ميسترال AI / ميسترال-7ب-إينستراك-حر  \n\n2. **التفسير:**  \n   نموذج لغوي مفتوح المصدر يُستخدم لأداء المهام diagnositazos (تشخيصية)، تم تطويره بواسطة Mistral AI، ويتميز بوزن خفيف (7 مليار معلمة) وسهولة الاستخدام في التطبيقات الطبية.  \n\n3. **مثال واضح:**  \n   يُستخدم لتحليل بيانات المرضى وتقديم توصيات علاجية مبنية على الأبحاث العلمية في مجال الطب.  \n\n(60 كلمة)\n",
+      "source": "openrouter_ai",
+      "timestamp": "2025-12-08T00:29:57.562624",
+      "id": "1765146597.562624"
+    },
+    {
+      "original": "ok make this logo now\n",
+      "translation": "للمصطلح الطبي: ***مطلوب حروف تكتب بخط واضح وواضح داخل دائرة أو مربع مع ألوان طبية خفيفة (مثل الأزرق الداكن أو البنفسجي) لسъкhline***.  \nملاحظة: يُرجى تزويدي بالحروف أو الرمز المطلوب في الشعار.\n",
+      "source": "openrouter_ai",
+      "timestamp": "2025-12-08T00:27:03.247396",
+      "id": "1765146423.247396"
+    },
+    {
+      "original": "i want an img that's sautable as ico",
+      "translation": "Not found in local dictionary",
+      "source": "cache",
+      "timestamp": "2025-12-08T00:26:34.226067",
+      "id": "1765146394.226067"
+    },
+    {
+      "original": "mistralai/mistral-7b-instruct:free",
+      "translation": "Not found in local dictionary",
+      "source": "local",
+      "timestamp": "2025-12-08T00:26:10.674413",
+      "id": "1765146370.674413"
+    },
+    {
+      "original": "i want an img that's sautable as ico",
+      "translation": "Not found in local dictionary",
+      "source": "local",
+      "timestamp": "2025-12-08T00:23:09.500058",
+      "id": "1765146189.500058"
+    },
+    {
+      "original": "i want an img that's sautable as ico",
+      "translation": "OpenRouter AI unavailable",
+      "source": "openrouter_ai",
+      "timestamp": "2025-12-08T00:22:27.845418",
+      "id": "1765146147.845418"
+    },
+    {
+      "original": "nvidia/nemotron-nano-12b-v2-vl:free",
+      "translation": "Not found in local dictionary",
+      "source": "cache",
+      "timestamp": "2025-12-08T00:21:53.373961",
+      "id": "1765146113.373961"
+    },
+    {
+      "original": "meta-llama/llama-3-8b-instruct:free",
+      "translation": "Not found in local dictionary",
+      "source": "local",
+      "timestamp": "2025-12-08T00:21:47.782995",
+      "id": "1765146107.782995"
+    },
+    {
+      "original": "nvidia/nemotron-nano-12b-v2-vl:free",
+      "translation": "Not found in local dictionary",
+      "source": "local",
+      "timestamp": "2025-12-08T00:21:32.240185",
+      "id": "1765146092.240185"
+    },
+    {
+      "original": "arcee-ai/trinity-mini:free",
+      "translation": "Not found in local dictionary",
+      "source": "local",
+      "timestamp": "2025-12-08T00:21:23.008459",
+      "id": "1765146083.008459"
+    },
+    {
+      "original": "amazon/nova-2-lite-v1:free",
+      "translation": "أمازون/نوفا-2-لايت-v1:مجانًا",
+      "source": "cache",
+      "timestamp": "2025-12-08T00:20:57.639220",
+      "id": "1765146057.63922"
+    },
+    {
+      "original": "arcee-ai/trinity-mini:free",
+      "translation": "arcee-ai/trinity-mini:مجاني",
+      "source": "libre",
+      "timestamp": "2025-12-08T00:20:57.587108",
+      "id": "1765146057.587108"
+    },
+    {
+      "original": "amazon/nova-2-lite-v1:free",
+      "translation": "أمازون/نوفا-2-لايت-v1:مجانًا",
+      "source": "libre",
+      "timestamp": "2025-12-08T00:20:55.475915",
+      "id": "1765146055.475915"
+    },
+    {
+      "original": "كان المسلمين يعملو",
+      "translation": "Muslims used to work",
+      "source": "libre",
+      "timestamp": "2025-12-08T00:17:41.480349",
+      "id": "1765145861.480349"
+    },
+    {
+      "original": "كان المسلمين يعملون",
+      "translation": ";hk hglsgldk dulg,k",
+      "source": "cache",
+      "timestamp": "2025-12-08T00:17:07.953250",
+      "id": "1765145827.95325"
+    },
+    {
+      "original": ";hk hglsgldk dulg,k",
+      "translation": "كان المسلمين يعملون",
+      "source": "cache",
+      "timestamp": "2025-12-08T00:17:05.237142",
+      "id": "1765145825.237142"
+    },
+    {
+      "original": "كان المسلمين يعملون",
+      "translation": ";hk hglsgldk dulg,k",
+      "source": "keyboard_fixer",
+      "timestamp": "2025-12-08T00:17:05.186000",
+      "id": "1765145825.186"
+    },
+    {
+      "original": ";hk hglsgldk dulg,k",
+      "translation": "كان المسلمين يعملون",
+      "source": "keyboard_fixer",
+      "timestamp": "2025-12-08T00:17:05.063473",
+      "id": "1765145825.063473"
+    },
+    {
+      "original": "work",
+      "translation": "صخقن",
+      "source": "cache",
+      "timestamp": "2025-12-08T00:16:40.705556",
+      "id": "1765145800.705556"
+    },
+    {
+      "original": "صخقن",
+      "translation": "work",
+      "source": "cache",
+      "timestamp": "2025-12-08T00:16:30.204750",
+      "id": "1765145790.20475"
+    },
+    {
+      "original": "work",
+      "translation": "صخقن",
+      "source": "keyboard_fixer",
+      "timestamp": "2025-12-08T00:16:30.150189",
+      "id": "1765145790.150189"
+    },
+    {
+      "original": "صخقن",
+      "translation": "work",
+      "source": "keyboard_fixer",
+      "timestamp": "2025-12-08T00:16:30.028255",
+      "id": "1765145790.028255"
+    },
+    {
+      "original": ";jhf",
+      "translation": "No keyboard error detected",
+      "source": "cache",
+      "timestamp": "2025-12-08T00:16:03.429500",
+      "id": "1765145763.4295"
+    },
+    {
+      "original": "Gradien",
+      "translation": "gradient: الميل",
+      "source": "local",
+      "timestamp": "2025-12-08T00:15:42.646165",
+      "id": "1765145742.646165"
+    },
+    {
+      "original": "SVG icon",
+      "translation": "vicount: الفيكونت - منزلة إجتماعية",
+      "source": "local",
+      "timestamp": "2025-12-08T00:15:35.745163",
+      "id": "1765145735.745163"
+    },
+    {
+      "original": "example",
+      "translation": "OpenRouter AI unavailable",
+      "source": "openrouter_ai",
+      "timestamp": "2025-12-08T00:13:45.965287",
+      "id": "1765145625.965287"
+    },
+    {
+      "original": "Complete rewritten code with all improvements",
+      "translation": "OpenRouter AI unavailable",
+      "source": "openrouter_ai",
+      "timestamp": "2025-12-08T00:13:20.378464",
+      "id": "1765145600.378464"
+    },
+    {
+      "original": "Complete",
+      "translation": "كامل",
+      "source": "local",
+      "timestamp": "2025-12-08T00:12:56.742989",
+      "id": "1765145576.742989"
+    }
+  ],
+  "favorites": [
+    {
+      "original": "حظر التجول",
+      "translation": "Not found in local dictionary",
+      "source": "local",
+      "added_at": "2025-12-08T00:00:40.871310"
+    },
+    {
+      "original": "screening for high",
+      "translation": "الفحص للكشف عن المستويات العالية",
+      "source": "libre",
+      "added_at": "2025-12-06T05:27:49.188866"
+    },
+    {
+      "original": "Stent",
+      "translation": "tent: الخيمة",
+      "source": "local",
+      "added_at": "2025-12-06T05:26:17.150235"
+    },
+    {
+      "original": "placement.",
+      "translation": "التنسيب",
+      "source": "local",
+      "added_at": "2025-12-06T05:26:07.309551"
+    }
+  ]
+}

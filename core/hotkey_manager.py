@@ -18,7 +18,7 @@ class HotkeyManager:
             config: Application configuration
         """
         self.config = config
-        self.hotkeys = config.get('hotkeys', default={})
+        self.hotkeys = config.get('hotkeys', {})
         self.registered_hotkeys = {}
         self.callbacks = {}
     

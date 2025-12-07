@@ -1,0 +1,71 @@
+{
+    "version": "1.0.0",
+    "general": {
+        "auto_start": false,
+        "show_notifications": true,
+        "play_sound": false,
+        "translator_active": false
+    },
+    "translation": {
+        "active_source": "auto",
+        "source_priority": [
+            "keyboard_fixer",
+            "openrouter_ai",
+            "libre",
+            "local"
+        ],
+        "default_source_lang": "auto",
+        "default_target_lang": "ar",
+        "offline_fallback": true,
+        "cache_enabled": true,
+        "cache_size": 100
+    },
+    "popup": {
+        "auto_close": true,
+        "auto_close_delay": 5,
+        "position": "top_right",
+        "width": 480,
+        "height": 220,
+        "opacity": 95,
+        "enable_animations": true,
+        "font_family": "Segoe UI",
+        "font_size": 12
+    },
+    "openrouter": {
+        "api_key": "YOUR_API_KEY_HERE",
+        "model": "amazon/nova-2-lite-v1:free",
+        "system_prompt": "You are a concise medical terminology assistant. When given a medical term:\n1. Provide Arabic translation\n2. Brief 1-2 sentence explanation in Arabic\n3. ONE simple example\n4. Keep under 60 words\n\nFormat your response clearly and concisely.",
+        "custom_prompt": "",
+        "max_tokens": 150,
+        "temperature": 0.7,
+        "include_examples": true
+    },
+    "hotkeys": {
+        "start_translator": "ctrl+shift+1",
+        "stop_translator": "ctrl+shift+2",
+        "cycle_sources": "ctrl+shift+3",
+        "force_ai": "ctrl+shift+a",
+        "force_libre": "ctrl+shift+l",
+        "force_local": "ctrl+shift+d",
+        "force_keyfix": "ctrl+shift+k",
+        "copy_result": "ctrl+alt+c",
+        "pin_window": "ctrl+alt+p",
+        "open_settings": "ctrl+alt+s",
+        "toggle_tab": "ctrl+alt+t"
+    },
+    "appearance": {
+        "theme": "dark_minimal",
+        "custom_colors": null
+    },
+    "advanced": {
+        "network_timeout": 5,
+        "retry_attempts": 3,
+        "enable_logging": true,
+        "log_level": "INFO",
+        "check_updates": true
+    },
+    "dictionaries": {
+        "medical_terms_path": "dictionary.json",
+        "preload_at_startup": true
+    }
+}
